@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <script src="gl-matrix-min.js"></script>
+    <script src="libgsl.js"></script>
+    <script src="index.js"></script>
+  </head>
+  <body>
+    <h1>Dual contouring</h1>
+    <p>
+      A simplified implementation of the dual contouring algorithm, as described
+      in the following paper:
+      <a href="http://www.frankpetterson.com/publications/dualcontour/dualcontour.pdf">
+        http://www.frankpetterson.com/publications/dualcontour/dualcontour.pdf
+      </a>
+    </p>
+    <p>
+      The shape you see is procedurally generated, using the description you
+      see below. To play with it, change the description of the shape, and then
+      click REGENERATE.
+    </p>
+    <canvas id="canvas" width="512" height="512"></canvas>
+    <textarea id="textarea" rows="25" cols="80" style="display:block">
+      difference(
+        intersection(
+          scale(
+            box(),
+            [0.75, 0.75, 0.75]
+          ),
+          sphere()
+        ),
+        union(
+          union(
+            rotateX(
+              scale(
+                cylinder(),
+                [0.5, 1.0, 0.5]
+              ),
+              0.5 * Math.PI
+            ),
+            rotateZ(
+              scale(
+                cylinder(),
+                [0.5, 1.0, 0.5]
+              ),
+              0.5 * Math.PI
+            )
+          ),
+          scale(
+            cylinder(),
+            [0.5, 1.0, 0.5]
+          )
+        )
+      );
+    </textarea>
+    <button onclick="generateMesh()">REGENERATE</button>
+  </body>
+</html>
